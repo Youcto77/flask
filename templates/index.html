@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion d'Inventaire</title>
+</head>
+<body>
+    <h1>Inventaire</h1>
+    <table border="1">
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix (€)</th>
+        </tr>
+        {% for produit in inventaire %}
+        <tr>
+            <td>{{ produit[0] }}</td>
+            <td>{{ produit[1] }}</td>
+            <td>{{ produit[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Ajouter un Produit</h2>
+    <form action="{{ url_for('ajouter_produit') }}" method="post">
+        <input type="text" name="nom" placeholder="Nom du produit" required>
+        <input type="number" name="quantite" placeholder="Quantité" required>
+        <input type="number" step="0.01" name="prix" placeholder="Prix" required>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Mettre à jour la Quantité d'un Produit</h2>
+    <form action="{{ url_for('mettre_a_jour_quantite') }}" method="post">
+        <input type="text" name="nom" placeholder="Nom du produit" required>
+        <input type="number" name="quantite" placeholder="Nouvelle Quantité" required>
+        <button type="submit">Mettre à jour</button>
+    </form>
+
+    <h2>Supprimer un Produit</h2>
+    <form action="{{ url_for('supprimer_produit') }}" method="post">
+        <input type="text" name="nom" placeholder="Nom du produit" required>
+        <button type="submit">Supprimer</button>
+    </form>
+</body>
+</html>
